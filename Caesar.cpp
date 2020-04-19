@@ -28,25 +28,29 @@ Caesar::~Caesar() { m_shift = NULL; }
     // Preconditions - Message exists
     // Postconditions - Shifts each character "right".
 void Caesar::Encrypt() {
-    int testVal = 0;
+    int modShift = 0;
     string newMessage = GetMessage();
     int messageSize = newMessage.length();
 
     for (int i = 0; i < messageSize; i++) {
         char x = newMessage.at(i);
-        if (((x <= MAX_UP_C_VAL) && (x >= MIN_UP_C_VAL)) || 
+        if (((x <= MAX_UP_C_VAL) && (x >= MIN_UP_C_VAL)) ||
             ((x <= MAX_LOW_C_VAL) && (x >= MIN_LOW_C_VAL))) {
 
             // uppercase letters only 
             if (isupper(x)) {
-                testVal = (x + (m_shift % MAX_CHAR)) - MAX_UP_C_VAL;
+                // converts x to range 0-26
+                x -= MIN_UP_C_VAL;
+                modShift = (x + m_shift) % MAX_CHAR;
+
                 // if char is out of A-Z range 
-                if (testVal > 0) {
-                    x = MIN_UP_C_VAL + (m_shift - testVal);
+                if (x + m_shift >= MAX_CHAR) {
+                    x = MIN_UP_C_VAL + modShift;
                     newMessage.at(i) = x;
                 }
 
                 else {
+                    x += MIN_UP_C_VAL;
                     x += m_shift;
                     newMessage.at(i) = x;
                 }
@@ -54,21 +58,25 @@ void Caesar::Encrypt() {
 
             // lowercase letters only
             else {
-                testVal = (x + (m_shift % MAX_CHAR)) - MAX_LOW_C_VAL;
+                // converts x to range 0-26
+                x -= MIN_LOW_C_VAL;
+                modShift = (x + m_shift) % MAX_CHAR;
+
                 // if char is out of A-Z range
-                if (testVal > 0) {
-                    x = MIN_LOW_C_VAL + (m_shift - testVal);
+                if (x + m_shift >= MAX_CHAR) {
+                    x = MIN_LOW_C_VAL + modShift;
                     newMessage.at(i) = x;
                 }
 
                 else {
+                    x += MIN_LOW_C_VAL;
                     x += m_shift;
                     newMessage.at(i) = x;
                 }
             }
             SetMessage(newMessage);
         }
-        
+
     }
 
 }
@@ -89,14 +97,17 @@ void Caesar::Decrypt() {
 
             // uppercase letters only 
             if (isupper(x)) {
-                testVal = (x - (m_shift % MAX_CHAR)) - MIN_UP_C_VAL;
+                x -= MIN_UP_C_VAL;
+                testVal = (x - m_shift) % MAX_CHAR;
+
                 // if char is out of A-Z range 
                 if (testVal < 0) {
-                    x = MAX_UP_C_VAL - (m_shift + testVal);
+                    x = (MAX_UP_C_VAL + testVal) + 1;
                     newMessage.at(i) = x;
                 }
 
                 else {
+                    x += MIN_UP_C_VAL;
                     x -= m_shift;
                     newMessage.at(i) = x;
                 }
@@ -104,14 +115,17 @@ void Caesar::Decrypt() {
 
             // lowercase letters only
             else {
-                testVal = (x - (m_shift % MAX_CHAR)) - MIN_LOW_C_VAL;
+                x -= MIN_LOW_C_VAL;
+                testVal = (x - m_shift) % MAX_CHAR;
+
                 // if char is out of A-Z range
                 if (testVal < 0) {
-                    x = MAX_LOW_C_VAL - (m_shift + testVal);
+                    x = (MAX_LOW_C_VAL + testVal) + 1;
                     newMessage.at(i) = x;
                 }
 
                 else {
+                    x += MIN_LOW_C_VAL;
                     x -= m_shift;
                     newMessage.at(i) = x;
                 }
@@ -136,8 +150,8 @@ string Caesar::ToString() { return STR_CAESAR; }
 string Caesar::FormatOutput() {
     stringstream strStream;
     string objType(NUMCHAR, ISCAESAR);
-    strStream << objType << DELIMITER << 
-        to_string(GetIsEncrypted()) << DELIMITER << GetMessage() 
+    strStream << objType << DELIMITER <<
+        to_string(GetIsEncrypted()) << DELIMITER << GetMessage()
         << DELIMITER << to_string(m_shift);
     return strStream.str();
 }
