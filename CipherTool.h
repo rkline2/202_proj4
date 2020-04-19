@@ -12,9 +12,11 @@
 using namespace std;
 
 //**Constants**
-const char ISCAESAR = 'c';
-const char ISVIGEN = 'v';
-const char ISONG = 'o';
+const int DISPLAY = 1;
+const int ENCRYPT = 2;
+const int DECRYPT = 3;
+const int EXPORT = 4;
+const int QUIT = 5;
 
 class CipherTool {
 public:
@@ -23,43 +25,51 @@ public:
     // Preconditions - Input file passed and populated with Cipher
     // Postconditions - CipherTool created
     CipherTool(string);
+
     // Name: CipherTool Destructor
     // Desc - Calls destructor for all ciphers in m_ciphers
     // Preconditions - m_ciphers is populated
     // Postconditions - m_ciphers emptied
     ~CipherTool();
+
     // Name: LoadFile
     // Desc - Opens file and reads in each Cipher. Each Cipher dynamically allocated
     // and put into m_ciphers
     // Preconditions - Input file passed and populated with Ciphers
     // Postconditions - m_ciphers populated with Ciphers
     void LoadFile();
+
     // Name: DisplayCiphers
     // Desc - Displays each of the ciphers in the m_ciphers
     // Preconditions - Input file passed and m_ciphers populated
     // Postconditions - Displays ciphers
     void DisplayCiphers();
+
     // Name: EncryptDecrypt
     // Desc - Encrypts or decrypts each of the ciphers in the m_ciphers
     // Preconditions - Input file passed and m_ciphers populated
     // Postconditions - Either Encrypts or Decrypts each cipher in m_ciphers
     void EncryptDecrypt(bool);
+
     // Name: Export
     // Desc - Exports each of the ciphers in the m_ciphers (so they can be reused)
     // Preconditions - Input file passed and m_ciphers populated
     // Postconditions - All ciphers exported
     void Export();
+
     // Name: Menu
     // Desc - Displays menu and returns choice
     // Preconditions - m_ciphers all populated
     // Postconditions - Returns choice
-    //int Menu();
+    int Menu();
+
     // Name: GetType
     // Desc - Pass it a cipher and it returns the char of the subtype
     // Returns c for Caesar, v for Vigenere, and o for Ong
     // Preconditions - m_ciphers all populated
     // Postconditions - Returns char of type
-    //char GetType(Cipher*);
+    char GetType(Cipher*);
+
     // Name: Start
     // Desc - Loads input file, allows user to choose what to do
     // Preconditions - m_ciphers populated with ciphers
