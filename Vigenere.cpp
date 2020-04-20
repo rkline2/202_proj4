@@ -6,9 +6,9 @@
 ** Section: 02
 ** E-mail:  rkline2@umbc.edu
 **
-** This file contains the derived class "Vigenere". 
-** The primary functions are to encrypt, decrypt, and 
-** format a given message from the base class.    
+** This file contains the derived class "Vigenere".
+** The primary functions are to encrypt, decrypt, and
+** format a given message from the base class.
 **
 ***********************************************/
 #include "Vigenere.h"
@@ -29,7 +29,7 @@ Vigenere::~Vigenere() { m_key.erase(); }
 
 // Encrypt
     // Encrypts using key
-void Vigenere::Encrypt(){
+void Vigenere::Encrypt() {
     string newMessage = GetMessage();
     char keyChar;
     int shift = 0;
@@ -48,32 +48,32 @@ void Vigenere::Encrypt(){
             }
 
             keyChar = m_key.at(keyVal);
-                // uppercase letters only 
-                if (isupper(x)) {
-                    // change to values 0-25
-                    keyChar = toupper(keyChar) - MIN_UP_C_VAL;
-                    x -= MIN_UP_C_VAL;
+            // uppercase letters only 
+            if (isupper(x)) {
+                // change to values 0-25
+                keyChar = toupper(keyChar) - MIN_UP_C_VAL;
+                x -= MIN_UP_C_VAL;
 
-                    shift = (x + keyChar) % MAX_CHAR;
-                    x = MIN_UP_C_VAL + shift;
-                }
+                shift = (x + keyChar) % MAX_CHAR;
+                x = MIN_UP_C_VAL + shift;
+            }
 
-                // lowercase letters only
-                else {
-                    // change to values 0-25
-                    keyChar = tolower(keyChar) - MIN_LOW_C_VAL;
-                    x -= MIN_LOW_C_VAL;
+            // lowercase letters only
+            else {
+                // change to values 0-25
+                keyChar = tolower(keyChar) - MIN_LOW_C_VAL;
+                x -= MIN_LOW_C_VAL;
 
-                    shift = (x + keyChar) % MAX_CHAR;
-                    x = MIN_LOW_C_VAL + shift;
-                }
-                newMessage.at(i) = x;
-                SetMessage(newMessage);
-                keyVal++; 
+                shift = (x + keyChar) % MAX_CHAR;
+                x = MIN_LOW_C_VAL + shift;
+            }
+            newMessage.at(i) = x;
+            SetMessage(newMessage);
+            keyVal++;
         }
-              
+
     }
-   
+
 }
 
 // Decrypt
@@ -110,7 +110,7 @@ void Vigenere::Decrypt() {
                     shift = (keyChar - x) % MAX_CHAR;
                     x = (MAX_UP_C_VAL - shift) + 1;
                 }
-                
+
             }
             // lowercase letters only
             else {
@@ -127,7 +127,7 @@ void Vigenere::Decrypt() {
                     shift = (keyChar - x) % MAX_CHAR;
                     x = (MAX_LOW_C_VAL - shift) + 1;
                 }
-                
+
             }
             newMessage.at(i) = x;
             SetMessage(newMessage);
@@ -145,9 +145,8 @@ string Vigenere::ToString() { return STR_VIGEN; }
     // Returns the formatted output for Output function
 string Vigenere::FormatOutput() {
     stringstream strStream;
-    string objtype(NUMCHAR, ISVIGEN);
-    strStream << objtype << DELIMITER <<
-        to_string(GetIsEncrypted()) << DELIMITER << GetMessage()
+    strStream << ISVIGEN << DELIMITER <<
+        GetIsEncrypted() << DELIMITER << GetMessage()
         << DELIMITER << m_key;
     return strStream.str();
 }
