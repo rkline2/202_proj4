@@ -1,20 +1,30 @@
+/*****************************************
+** File:    CipherTool.cpp
+** Project: CMSC 202 Project 4, Spring 2020
+** Author:  Rooklyn Kline
+** Date:    4/21/20
+** Section: 02
+** E-mail:  rkline2@umbc.edu
+**
+** This file contains the class "CipherTool".
+** This class helps out the base class "Cipher" by
+** receiving the messages from a .txt file and storing  
+** it in a vevtor. It's the primary class for the user to 
+** interact to the program. 
+***********************************************/
 #include "CipherTool.h"
 #include <iomanip>
 #include <iostream>
 using namespace std;
 
-// Name: CipherTool Constructor
-    // Desc - Creates a new CipherTool and sets m_filename based on string passed
-    // Preconditions - Input file passed and populated with Cipher
-    // Postconditions - CipherTool created
+// CipherTool (Constructor)
+    // Creates a new CipherTool and sets m_filename based on string passed
 CipherTool::CipherTool(string filename) {
     m_filename = filename;
 }
 
-// Name: CipherTool Destructor
-    // Desc - Calls destructor for all ciphers in m_ciphers
-    // Preconditions - m_ciphers is populated
-    // Postconditions - m_ciphers emptied
+// CipherTool (Destructor)
+    // m_ciphers is emptied
 CipherTool::~CipherTool() {
     m_filename.erase();
     for (unsigned int i = 0; i != m_ciphers.size(); i++) {
@@ -24,11 +34,8 @@ CipherTool::~CipherTool() {
     
 }
 
-// Name: LoadFile
-    // Desc - Opens file and reads in each Cipher. Each Cipher dynamically allocated
-    // and put into m_ciphers
-    // Preconditions - Input file passed and populated with Ciphers
-    // Postconditions - m_ciphers populated with Ciphers
+// LoadFile
+    // m_ciphers is populated with Ciphers
 void CipherTool::LoadFile() {
     char cipherType;
     string isEncrypted;
@@ -65,20 +72,16 @@ void CipherTool::LoadFile() {
     file.close();
 }
 
-// Name: DisplayCiphers
-    // Desc - Displays each of the ciphers in the m_ciphers
-    // Preconditions - Input file passed and m_ciphers populated
-    // Postconditions - Displays ciphers
+// DisplayCiphers
+    // Displays each of the ciphers in the m_ciphers
 void CipherTool::DisplayCiphers() {
     for (unsigned int i = 0; i != m_ciphers.size(); i++) {
         cout << i + 1 << ". " << *m_ciphers.at(i) << endl << endl;
     }
 }
 
-// Name: EncryptDecrypt
-    // Desc - Encrypts or decrypts each of the ciphers in the m_ciphers
-    // Preconditions - Input file passed and m_ciphers populated
-    // Postconditions - Either Encrypts or Decrypts each cipher in m_ciphers
+// EncryptDecrypt
+    // Either Encrypts or Decrypts each cipher in m_ciphers
 void CipherTool::EncryptDecrypt(bool encrypt) {
     int num = 0;
     // for encryption only
@@ -107,10 +110,8 @@ void CipherTool::EncryptDecrypt(bool encrypt) {
     }
 }
 
-// Name: Export
-    // Desc - Exports each of the ciphers in the m_ciphers (so they can be reused)
-    // Preconditions - Input file passed and m_ciphers populated
-    // Postconditions - All ciphers exported
+// Export
+    // Exports each of the ciphers in the m_ciphers (so they can be reused)
 void CipherTool::Export() {
     string newFilename = "*.txt";
     cout << "What would you like the file name to be?: ";
@@ -123,10 +124,8 @@ void CipherTool::Export() {
     newFile.close();
 }
 
-// Name: Menu
-    // Desc - Displays menu and returns choice
-    // Preconditions - m_ciphers all populated
-    // Postconditions - Returns choice
+// Menu
+    // Displays menu and returns user choice
 int CipherTool::Menu() {
     int usrInput = 0;
     cout << "What would you like to do?" << endl;
@@ -140,11 +139,8 @@ int CipherTool::Menu() {
     return usrInput;
 }
 
-// Name: GetType
-    // Desc - Pass it a cipher and it returns the char of the subtype
-    // Returns c for Caesar, v for Vigenere, and o for Ong
-    // Preconditions - m_ciphers all populated
-    // Postconditions - Returns char of type
+// GetType
+    // Given a cipher, returns char of cipher type
 char CipherTool::GetType(Cipher* cipherPtr) {
     if (dynamic_cast<Caesar*>(cipherPtr)) { return ISCAESAR; }
 
@@ -156,10 +152,8 @@ char CipherTool::GetType(Cipher* cipherPtr) {
 
 }
 
-// Name: Start
-   // Desc - Loads input file, allows user to choose what to do
-   // Preconditions - m_ciphers populated with ciphers
-   // Postconditions - none
+// Start
+   // Loads input file, allows user to choose what to do
 void CipherTool::Start() {
     LoadFile();
     int usrChoice = Menu();
@@ -187,7 +181,3 @@ void CipherTool::Start() {
    
 }
 
-/*
-    vector<Cipher*> m_ciphers; //List of all Ciphers
-    string m_filename; //Name of the file passed from proj4.cpp
-*/
