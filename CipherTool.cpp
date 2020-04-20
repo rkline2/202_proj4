@@ -8,9 +8,9 @@
 **
 ** This file contains the class "CipherTool".
 ** This class helps out the base class "Cipher" by
-** receiving the messages from a .txt file and storing  
-** it in a vevtor. It's the primary class for the user to 
-** interact to the program. 
+** receiving the messages from a .txt file and storing
+** it in a vevtor. It's the primary class for the user to
+** interact to the program.
 ***********************************************/
 #include "CipherTool.h"
 #include <iomanip>
@@ -29,9 +29,10 @@ CipherTool::~CipherTool() {
     m_filename.erase();
     for (unsigned int i = 0; i != m_ciphers.size(); i++) {
         delete m_ciphers.at(i);
+        m_ciphers.at(i) = nullptr;
     }
     m_ciphers.clear();
-    
+
 }
 
 // LoadFile
@@ -44,30 +45,30 @@ void CipherTool::LoadFile() {
 
     ifstream file;
     file.open(m_filename);
-    
+
     while (file >> cipherType) {
-    Cipher* cipherPtr;
+        Cipher* cipherPtr;
 
-    file.ignore(256,DELIMITER);
-    getline(file, isEncrypted, DELIMITER);
-    getline(file, message, DELIMITER);
+        file.ignore(256, DELIMITER);
+        getline(file, isEncrypted, DELIMITER);
+        getline(file, message, DELIMITER);
 
-    if (cipherType == ISCAESAR){
-        getline(file,shift);
-        cipherPtr = new Caesar(message, stoi(isEncrypted), stoi(shift));
-    }
+        if (cipherType == ISCAESAR) {
+            getline(file, shift);
+            cipherPtr = new Caesar(message, stoi(isEncrypted), stoi(shift));
+        }
 
-    else if (cipherType == ISVIGEN) {
-        getline(file, shift);
-        cipherPtr = new Vigenere(message, stoi(isEncrypted), shift);
-    }
+        else if (cipherType == ISVIGEN) {
+            getline(file, shift);
+            cipherPtr = new Vigenere(message, stoi(isEncrypted), shift);
+        }
 
-    else if (cipherType == ISONG) {
-        cipherPtr = new Ong(message, stoi(isEncrypted));
-    }
+        else if (cipherType == ISONG) {
+            cipherPtr = new Ong(message, stoi(isEncrypted));
+        }
 
-    m_ciphers.push_back(cipherPtr);
-    
+        m_ciphers.push_back(cipherPtr);
+
     }
     file.close();
 }
@@ -119,7 +120,7 @@ void CipherTool::Export() {
 
     ofstream newFile(newFilename);
     for (unsigned int i = 0; i != m_ciphers.size(); i++) {
-    newFile << m_ciphers.at(i)->FormatOutput() << '\n';
+        newFile << m_ciphers.at(i)->FormatOutput() << '\n';
     }
     newFile.close();
 }
@@ -147,7 +148,7 @@ char CipherTool::GetType(Cipher* cipherPtr) {
     else if (dynamic_cast<Ong*>(cipherPtr)) { return ISONG; }
 
     else if (dynamic_cast<Vigenere*>(cipherPtr)) { return ISVIGEN; }
-    
+
     return -1;
 
 }
@@ -158,7 +159,7 @@ void CipherTool::Start() {
     LoadFile();
     int usrChoice = Menu();
     while (usrChoice != QUIT) {
-        switch (usrChoice){
+        switch (usrChoice) {
         case DISPLAY:
             DisplayCiphers();
             break;
@@ -178,5 +179,5 @@ void CipherTool::Start() {
 
     }
     cout << "Thanks for using UMBC Encryption" << endl;
-   
+
 }
