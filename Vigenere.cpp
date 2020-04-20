@@ -1,29 +1,34 @@
+/*****************************************
+** File:    Vigenere.cpp
+** Project: CMSC 202 Project 4, Spring 2020
+** Author:  Rooklyn Kline
+** Date:    4/21/20
+** Section: 02
+** E-mail:  rkline2@umbc.edu
+**
+** This file contains the derived class "Vigenere". 
+** The primary functions are to encrypt, decrypt, and 
+** format a given message from the base class.    
+**
+***********************************************/
 #include "Vigenere.h"
 #include <iostream>
 using namespace std;
 
-// Name: Vigenere (Default Constructor)
-    // Desc: Constructor to build an empty Vigenere Cipher (Defaults key to "test")
-    // Preconditions - None
-    // Postconditions - Creates a Vigenere cipher to be encrypted
+// Vigenere (Default Constructor)
+    // Creates a Vigenere cipher to be encrypted
 Vigenere::Vigenere() { m_key = DEFAULTKEY; }
 
-// Name: Vigenere (Overloaded Constructor)
-    // Desc: Constructor to build a populated Vigenere Cipher
-    // Preconditions - Pass it the message, isEncrypted, and key
-    // Postconditions - Creates a Vigenere cipher to be encrypted
+// Vigenere (Overloaded Constructor)
+    // Given the the message, isEncrypted, and key, creates a Vigenere cipher to be encrypted
 Vigenere::Vigenere(string message, bool isEncrypted, string key) :Cipher(message, isEncrypted) { m_key = key; }
 
-// Name: Vigenere (Destructor)
-    // Desc: Destructor - Anything specific to delete in Vigenere?
-    // Preconditions - ~Vigenere exists
-    // Postconditions - Vigenere destroyed
+// Vigenere (Destructor)
+    // Deletes anything specific to Vigenere
 Vigenere::~Vigenere() { m_key.erase(); }
 
-// Name: Encrypt
-    // Desc: Encrypts using key (See project document for details)
-    // Preconditions - Message exists
-    // Postconditions - Encrypts using key
+// Encrypt
+    // Encrypts using key
 void Vigenere::Encrypt(){
     string newMessage = GetMessage();
     char keyChar;
@@ -33,6 +38,7 @@ void Vigenere::Encrypt(){
 
     for (int i = 0; i < messageSize; i++) {
         char x = newMessage.at(i);
+        // if the char is a letter 
         if (((x <= MAX_UP_C_VAL) && (x >= MIN_UP_C_VAL)) ||
             ((x <= MAX_LOW_C_VAL) && (x >= MIN_LOW_C_VAL))) {
 
@@ -70,10 +76,8 @@ void Vigenere::Encrypt(){
    
 }
 
-// Name: Decrypt
-    // Desc: Decrypts using key (See project document for details)
-    // Preconditions - Message exists
-    // Postconditions - Uses key to decrypt.
+// Decrypt
+    // Uses key to decrypt.
 void Vigenere::Decrypt() {
     string newMessage = GetMessage();
     char keyChar;
@@ -83,6 +87,7 @@ void Vigenere::Decrypt() {
 
     for (int i = 0; i < messageSize; i++) {
         char x = newMessage.at(i);
+        // if the char is a letter 
         if (((x <= MAX_UP_C_VAL) && (x >= MIN_UP_C_VAL)) ||
             ((x <= MAX_LOW_C_VAL) && (x >= MIN_LOW_C_VAL))) {
             // when the keyVal has reached it's max limit 
@@ -132,17 +137,12 @@ void Vigenere::Decrypt() {
     }
 }
 
-// Name: ToString
-    // Desc - A function that returns the string of the object type
-    // Preconditions - The object exists
-    // Postconditions - The subtype is returned (Vigenere in this case)
+// ToString
+    // Returns the string of the object type
 string Vigenere::ToString() { return STR_VIGEN; }
 
-// Name: FormatOutput()
-    // Desc - A function that returns the formatted output for Output function
-    // Preconditions - The object exists (use stringstream)
-    // Postconditions - v, delimiter, isencrypted, delimiter,
-    // message, delimiter, key are returned for output
+// FormatOutput 
+    // Returns the formatted output for Output function
 string Vigenere::FormatOutput() {
     stringstream strStream;
     string objtype(NUMCHAR, ISVIGEN);
@@ -151,5 +151,3 @@ string Vigenere::FormatOutput() {
         << DELIMITER << m_key;
     return strStream.str();
 }
-
-/*string m_key; //Key to encrypt or decrypt message*/
