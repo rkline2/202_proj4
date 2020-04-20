@@ -7,10 +7,10 @@
 ** E-mail:  rkline2@umbc.edu
 **
 ** This file contains the base class "Cipher".
-** This class contains the message and if the cipher 
-** has been encrypted or not for every cipher. 
-** The primary functions from this class are the getters 
-** and setters for the m variables. 
+** This class contains the message and if the cipher
+** has been encrypted or not for every cipher.
+** The primary functions from this class are the getters
+** and setters for the m variables.
 **
 ***********************************************/
 #include "Cipher.h"
@@ -64,7 +64,7 @@ ostream& operator<<(ostream& output, Cipher& C) {
     if (C.GetMessage().at(0) == QUOTE) {
         return output << C.GetMessage() << " (" << C.ToString() << ")";
     }
-    else { 
-        return output << "\"" << C.GetMessage() << "\"" << " (" << C.ToString() << ")"; 
-    }   
+    else {
+        return output << "\"" << C.GetMessage() << "\"" << " (" << C.ToString() << ")";
+    }
 }
