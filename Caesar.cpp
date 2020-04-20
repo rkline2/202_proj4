@@ -1,32 +1,36 @@
+/*****************************************
+** File:    Caesar.cpp
+** Project: CMSC 202 Project 4, Spring 2020
+** Author:  Rooklyn Kline
+** Date:    4/21/20
+** Section: 02
+** E-mail:  rkline2@umbc.edu
+**
+** This file contains the derived class "Caesar". 
+** The primary functions are to encrypt, decrypt, and 
+** format a given message from the base class.    
+**
+***********************************************/
 #include "Caesar.h"
-
 #include <iostream>
 using namespace std;
 
-// Name: Caesar (Default Constructor)
-    // Desc: Constructor to build an empty Caesar Cipher (Defaults to shift 3)
-    // Preconditions - None
-    // Postconditions - Creates a Caesar cipher to be encrypted
+// Caesar (Default Constructor)
+    // Creates a Caesar cipher to be encrypted
 Caesar::Caesar() { m_shift = DEFAULTSHIFT; }
 
-// Name: Caesar (Overloaded Constructor)
-    // Desc: Constructor to build a populated Caesar Cipher (Defaults to shift 3)
-    // Preconditions - Pass it the message, isEncrypted, and shift (any integer)
-    // Postconditions - Creates a Caesar cipher to be encrypted
+// Caesar (Overloaded Constructor)
+    // Given a message, isEncrypted, and shift. It creates a Caesar cipher to be encrypted
 Caesar::Caesar(string message, bool isEncrypted, int shift) :Cipher(message, isEncrypted) {
     m_shift = shift;
 }
 
-// Name: Caesar (Destructor)
-    // Desc: Destructor - Anything specific to Caesar to delete?
-    // Preconditions - ~Caesar exists
-    // Postconditions - Caesar destroyed
+// Caesar (Destructor)
+    // Postconditions - Destroys anything specific to Caesar
 Caesar::~Caesar() { m_shift = NULL; }
 
-// Name: Encrypt
-    // Desc: Shifts characters right based on shift (lower stay lower, upper stay upper)
-    // Preconditions - Message exists
-    // Postconditions - Shifts each character "right".
+// Encrypt
+    // Shifts each character to the right based on shift value
 void Caesar::Encrypt() {
     int modShift = 0;
     string newMessage = GetMessage();
@@ -50,6 +54,7 @@ void Caesar::Encrypt() {
                 }
 
                 else {
+                    // converts to ascii format
                     x += MIN_UP_C_VAL;
                     x += m_shift;
                     newMessage.at(i) = x;
@@ -69,6 +74,7 @@ void Caesar::Encrypt() {
                 }
 
                 else {
+                    // converts to ascii format
                     x += MIN_LOW_C_VAL;
                     x += m_shift;
                     newMessage.at(i) = x;
@@ -81,10 +87,8 @@ void Caesar::Encrypt() {
 
 }
 
-// Name: Decrypt
-    // Desc: Shifts characters left based on shift (lower stay lower, upper stay upper)
-    // Preconditions - Message exists
-    // Postconditions - Shifts each character "left".
+// Decrypt
+    // Shifts each character to the left based on shift value
 void Caesar::Decrypt() {
     int testVal = 0;
     string newMessage = GetMessage();
@@ -107,6 +111,7 @@ void Caesar::Decrypt() {
                 }
 
                 else {
+                    // converts to ascii format
                     x += MIN_UP_C_VAL;
                     x -= m_shift;
                     newMessage.at(i) = x;
@@ -125,6 +130,7 @@ void Caesar::Decrypt() {
                 }
 
                 else {
+                    // converts to ascii format
                     x += MIN_LOW_C_VAL;
                     x -= m_shift;
                     newMessage.at(i) = x;
@@ -136,17 +142,12 @@ void Caesar::Decrypt() {
     }
 }
 
-// Name: ToString
-    // Desc - A function that returns the string of the object type
-    // Preconditions - The object exists
-    // Postconditions - The subtype is returned (Caesar in this case)
+// ToString
+    // Returns the subtype of class Caesar 
 string Caesar::ToString() { return STR_CAESAR; }
 
-// Name: FormatOutput()
-   // Desc - A function that returns the formatted output for Output function
-   // Preconditions - The object exists (use stringstream)
-   // Postconditions - c, delimiter, isencrypted, delimiter,
-   // message, delimiter, m_shift are returned for output
+// FormatOutput
+   // Returns the formatted output for the Output function
 string Caesar::FormatOutput() {
     stringstream strStream;
     string objType(NUMCHAR, ISCAESAR);
@@ -156,4 +157,3 @@ string Caesar::FormatOutput() {
     return strStream.str();
 }
 
-/*int m_shift; //Number of characters to shift. (A shift 3 = D) (D shift -3 = A)*/
