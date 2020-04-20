@@ -6,9 +6,9 @@
 ** Section: 02
 ** E-mail:  rkline2@umbc.edu
 **
-** This file contains the derived class "Caesar". 
-** The primary functions are to encrypt, decrypt, and 
-** format a given message from the base class.    
+** This file contains the derived class "Caesar".
+** The primary functions are to encrypt, decrypt, and
+** format a given message from the base class.
 **
 ***********************************************/
 #include "Caesar.h"
@@ -150,10 +150,9 @@ string Caesar::ToString() { return STR_CAESAR; }
    // Returns the formatted output for the Output function
 string Caesar::FormatOutput() {
     stringstream strStream;
-    string objType(NUMCHAR, ISCAESAR);
-    strStream << objType << DELIMITER <<
-        to_string(GetIsEncrypted()) << DELIMITER << GetMessage()
-        << DELIMITER << to_string(m_shift);
+    strStream << ISCAESAR << DELIMITER <<
+        GetIsEncrypted() << DELIMITER << GetMessage()
+        << DELIMITER << m_shift;
     return strStream.str();
 }
 
