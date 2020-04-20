@@ -10,38 +10,38 @@
 using namespace std;
 
 //**Constants**
-const int DEFAULTSHIFT = 3;
-const string DEFAULTKEY = "test";
+const int DEFAULTSHIFT = 3;       // <-|
+const string DEFAULTKEY = "test"; // <-| Default values for ciphers 
 
-const char DELIMITER = '|';
-const char QUOTE = '"';
-const char SPACE = ' ';
+const char DELIMITER = '|'; // <-|
+const char QUOTE = '"';     //   | Used to identify punctuation in a sentence 
+const char SPACE = ' ';     // <-|
 
-const int NUMCHAR = 1;
-const int MAX_CHAR = 26;
+const int NUMCHAR = 1;   // <-| Modify and identify numbers 
+const int MAX_CHAR = 26; // <-|
 
-const char ISCAESAR = 'c';
-const char ISVIGEN = 'v';
-const char ISONG = 'o';
-const string STR_CAESAR = "Caesar";
-const string STR_VIGEN = "Vigenere";
-const string STR_ONG = "Ong";
+const char ISCAESAR = 'c';           // <-|
+const char ISVIGEN = 'v';            //   |
+const char ISONG = 'o';              //   | Cipher classifiers 
+const string STR_CAESAR = "Caesar";  //   |
+const string STR_VIGEN = "Vigenere"; //   |
+const string STR_ONG = "Ong";        // <-|
 
-const int MAX_LOW_C_VAL = 122;
-const int MIN_LOW_C_VAL = 97;
-const int MAX_UP_C_VAL = 90;
-const int MIN_UP_C_VAL = 65;
+const int MAX_LOW_C_VAL = 122;  // <-|
+const int MIN_LOW_C_VAL = 97;   //   | 
+const int MAX_UP_C_VAL = 90;    //   | Ascii identifiers 
+const int MIN_UP_C_VAL = 65;    // <-|
 
-const char IS_A = 'a';
-const char IS_E = 'e';
-const char IS_I = 'i';
-const char IS_O = 'o';
-const char IS_U = 'u';
+const char IS_A = 'a';  // <-|
+const char IS_E = 'e';  //   |
+const char IS_I = 'i';  //   | Used to classify if 
+const char IS_O = 'o';  //   | a char is a vowel
+const char IS_U = 'u';  // <-|
 
-const string ONG = "ong";
-const string ONG_W_DASH = "ong-";
-const char DASH_C = '-';
-const string DASH_STR = "-";
+const string ONG = "ong";         // <-|
+const string ONG_W_DASH = "ong-"; //   | Used for encryption/
+const char DASH_C = '-';          //   | decryption in the "Ong" class
+const string DASH_STR = "-";      // <-| 
 
 class Cipher {
 public:
