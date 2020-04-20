@@ -1,30 +1,35 @@
+/*****************************************
+** File:    Ong.cpp
+** Project: CMSC 202 Project 4, Spring 2020
+** Author:  Rooklyn Kline
+** Date:    4/21/20
+** Section: 02
+** E-mail:  rkline2@umbc.edu
+**
+** This file contains the derived class "Ong". 
+** The primary functions are to encrypt, decrypt, and 
+** format a given message from the base class.    
+**
+***********************************************/
 #include "Ong.h"
 #include <iostream>
 using namespace std;
 
-// Name: Ong (Default Constructor)
-    // Desc: Constructor to build an empty Ong Cipher
-    // Preconditions - None
-    // Postconditions - Creates a Ong cipher to be encrypted
+// Ong (Default Constructor)
+    // Creates a Ong cipher to be encrypted
 Ong::Ong() {}
 
-// Name: Ong (Overloaded Constructor)
-    // Desc: Constructor to build a populated Ong Cipher
-    // Preconditions - Pass it the message and isEncrypted
-    // Postconditions - Creates a Ong cipher to be encrypted
+// Ong (Overloaded Constructor)
+    // Given the message and isEncrypted, creates a Ong cipher to be encrypted
 Ong::Ong(string message, bool isEncrypted) :Cipher(message, isEncrypted) {}
 
-// Name: Ong (Destructor)
-    // Desc: Destructor - Anything unique to Ong to delete?
-    // Preconditions - ~Ong exists
-    // Postconditions - Ong destroyed
+// Ong (Destructor)
+    // Anything specific to Ong is destroyed
 Ong::~Ong() {}
 
 
-// Name: IsVowel (Helper function)
-    // Desc: Returns true if vowel, space, or punctuation
-    // Preconditions - Message exists
-    // Postconditions - Returns true or false as above
+// IsVowel 
+    // Given the char, returns true or false if it's a vowel
 bool Ong::IsVowel(char letter) {
 
     // uppercase letters 
@@ -44,11 +49,8 @@ bool Ong::IsVowel(char letter) {
 
 }
 
-// Name: Encrypt
-    // Desc: If vowel then vowel and dash displayed. dog = dong-o-gong
-    // If consonant then consonant and ong and dash displayed.
-    // Preconditions - Message exists
-    // Postconditions - Encrypts as above
+// Encrypt
+    // Uses Ong encryption to manipulate the message
 void Ong::Encrypt() {
     string newMessage = GetMessage();
     bool lastLetter = true;
@@ -57,17 +59,21 @@ void Ong::Encrypt() {
 
     for (int i = messageSize - 1; i >= 0; i--) {
         char x = newMessage.at(i);
+        // if the char is a letter
         if (((x <= MAX_UP_C_VAL) && (x >= MIN_UP_C_VAL)) ||
             ((x <= MAX_LOW_C_VAL) && (x >= MIN_LOW_C_VAL))) {
-            // last letter only
-            if (lastLetter) { 
+            // if it's the last letter of the sentence only
+            if (lastLetter) {
+                // if it's not a vowel
                 if (!IsVowel(x)) {
                     newMessage.insert(i + 1, ONG);
                 }
                 lastLetter = false; 
             }
-
+            // if the char is not the last letter 
             else {
+                // checks if the current char is a vowel
+                // and if the next char is a letter or not 
                 nextChar = newMessage.at(i + 1);
                 if (!IsVowel(x) && (((nextChar <= MAX_UP_C_VAL) && 
                     (nextChar >= MIN_UP_C_VAL)) || ((nextChar <= MAX_LOW_C_VAL) &&
@@ -88,10 +94,8 @@ void Ong::Encrypt() {
     }
 }
 
-// Name: Decrypt
-    // Desc: Removes the dashes and "ong" when necessary cong-a-tong = cat
-    // Preconditions - Message exists
-    // Postconditions - Original message is displayed
+// Decrypt
+    // Removes the dashes and "ong" when necessary
 void Ong::Decrypt() {
     string newMessage = GetMessage();
     for (int i = 0; i < newMessage.length(); i++) {
@@ -100,6 +104,7 @@ void Ong::Decrypt() {
             newMessage.erase(i, 1);
         }
         x = newMessage.at(i);
+        // if the char is a letter 
         if(((x <= MAX_UP_C_VAL) && (x >= MIN_UP_C_VAL)) ||
             ((x <= MAX_LOW_C_VAL) && (x >= MIN_LOW_C_VAL))) {
             if (!IsVowel(x)) {
@@ -110,17 +115,12 @@ void Ong::Decrypt() {
     }
 }
 
-// Name: ToString
-    // Desc - A function that returns the string of the object type
-    // Preconditions - The object exists
-    // Postconditions - The subtype is returned (Ong in this case)
+// ToString
+    // returns the string of the object type
 string Ong::ToString() {  return STR_ONG; }
 
-// Name: FormatOutput()
-    // Desc - A function that returns the formatted output for Output function
-    // Preconditions - The object exists (use stringstream)
-    // Postconditions - o, delimiter, isencrypted, delimiter,
-    //                  message, delimiter, blank are output
+// FormatOutput()
+    // returns the formatted output for Output function
 string Ong::FormatOutput() {
     stringstream strStream;
     string objType(NUMCHAR, ISONG);
