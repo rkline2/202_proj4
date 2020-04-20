@@ -180,4 +180,3 @@ void CipherTool::Start() {
     cout << "Thanks for using UMBC Encryption" << endl;
    
 }
-
