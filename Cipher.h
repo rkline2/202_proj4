@@ -10,28 +10,27 @@
 using namespace std;
 
 //**Constants**
-const char DELIMITER = '|';
 const int DEFAULTSHIFT = 3;
-const int NUMCHAR = 1;
 const string DEFAULTKEY = "test";
+
+const char DELIMITER = '|';
 const char QUOTE = '"';
+const char SPACE = ' ';
+
+const int NUMCHAR = 1;
+const int MAX_CHAR = 26;
 
 const char ISCAESAR = 'c';
 const char ISVIGEN = 'v';
 const char ISONG = 'o';
-
 const string STR_CAESAR = "Caesar";
 const string STR_VIGEN = "Vigenere";
 const string STR_ONG = "Ong";
 
 const int MAX_LOW_C_VAL = 122;
 const int MIN_LOW_C_VAL = 97;
-
 const int MAX_UP_C_VAL = 90;
 const int MIN_UP_C_VAL = 65;
-
-const int MAX_CHAR = 26;
-const char SPACE = ' ';
 
 const char IS_A = 'a';
 const char IS_E = 'e';
