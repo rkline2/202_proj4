@@ -6,9 +6,9 @@
 ** Section: 02
 ** E-mail:  rkline2@umbc.edu
 **
-** This file contains the derived class "Ong". 
-** The primary functions are to encrypt, decrypt, and 
-** format a given message from the base class.    
+** This file contains the derived class "Ong".
+** The primary functions are to encrypt, decrypt, and
+** format a given message from the base class.
 **
 ***********************************************/
 #include "Ong.h"
@@ -34,9 +34,9 @@ bool Ong::IsVowel(char letter) {
 
     // uppercase letters 
     if (letter == toupper(IS_A) || letter == toupper(IS_E) ||
-    letter == toupper(IS_I) || letter == toupper(IS_O) ||
-    letter == toupper(IS_U)) {
-    return true;
+        letter == toupper(IS_I) || letter == toupper(IS_O) ||
+        letter == toupper(IS_U)) {
+        return true;
     }
 
     // lowercase letters
@@ -68,17 +68,17 @@ void Ong::Encrypt() {
                 if (!IsVowel(x)) {
                     newMessage.insert(i + 1, ONG);
                 }
-                lastLetter = false; 
+                lastLetter = false;
             }
             // if the char is not the last letter 
             else {
                 // checks if the current char is a vowel
                 // and if the next char is a letter or not 
                 nextChar = newMessage.at(i + 1);
-                if (!IsVowel(x) && (((nextChar <= MAX_UP_C_VAL) && 
+                if (!IsVowel(x) && (((nextChar <= MAX_UP_C_VAL) &&
                     (nextChar >= MIN_UP_C_VAL)) || ((nextChar <= MAX_LOW_C_VAL) &&
-                        (nextChar >= MIN_LOW_C_VAL)))) { 
-                    newMessage.insert(i + 1, ONG_W_DASH); 
+                        (nextChar >= MIN_LOW_C_VAL)))) {
+                    newMessage.insert(i + 1, ONG_W_DASH);
                 }
 
                 else if (!IsVowel(x)) { newMessage.insert(i + 1, ONG); }
@@ -86,7 +86,7 @@ void Ong::Encrypt() {
                 else if (IsVowel(x) && (((nextChar <= MAX_UP_C_VAL) &&
                     (nextChar >= MIN_UP_C_VAL)) || ((nextChar <= MAX_LOW_C_VAL) &&
                         (nextChar >= MIN_LOW_C_VAL)))) {
-                    newMessage.insert(i + 1, DASH_STR); 
+                    newMessage.insert(i + 1, DASH_STR);
                 }
             }
             SetMessage(newMessage);
@@ -105,7 +105,7 @@ void Ong::Decrypt() {
         }
         x = newMessage.at(i);
         // if the char is a letter 
-        if(((x <= MAX_UP_C_VAL) && (x >= MIN_UP_C_VAL)) ||
+        if (((x <= MAX_UP_C_VAL) && (x >= MIN_UP_C_VAL)) ||
             ((x <= MAX_LOW_C_VAL) && (x >= MIN_LOW_C_VAL))) {
             if (!IsVowel(x)) {
                 newMessage.erase(i + 1, ONG.size());
@@ -117,15 +117,14 @@ void Ong::Decrypt() {
 
 // ToString
     // returns the string of the object type
-string Ong::ToString() {  return STR_ONG; }
+string Ong::ToString() { return STR_ONG; }
 
 // FormatOutput()
     // returns the formatted output for Output function
 string Ong::FormatOutput() {
     stringstream strStream;
-    string objType(NUMCHAR, ISONG);
-    strStream << objType << DELIMITER <<
-        to_string(GetIsEncrypted()) << DELIMITER
+    strStream << ISONG << DELIMITER <<
+        GetIsEncrypted() << DELIMITER
         << GetMessage() << DELIMITER;
     return strStream.str();
 
