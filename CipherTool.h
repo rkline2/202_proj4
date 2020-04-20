@@ -12,11 +12,11 @@
 using namespace std;
 
 //**Constants**
-const int DISPLAY = 1;
-const int ENCRYPT = 2;
-const int DECRYPT = 3;
-const int EXPORT = 4;
-const int QUIT = 5;
+const int DISPLAY = 1; // -|
+const int ENCRYPT = 2; //  |
+const int DECRYPT = 3; //  | Menu options   
+const int EXPORT = 4;  //  |
+const int QUIT = 5;    // -|
 
 class CipherTool {
 public:
