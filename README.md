@@ -2,18 +2,18 @@
 ## 1. Description
 Your assignment is to implement a system that can be used to encrypt or decrypt three different ciphers. 
 
-###Cipher 1: Caesar Cipher - 
+### Cipher 1: Caesar Cipher -<br>
 It is a simple substitution cipher. It is a type of substitution cipher in which each letter in the plaintext
 (we will read it in as a file) is replaced by a letter some fixed number of positions down the alphabet. For example, if we shifted 3, ‘a’ would be a
 ‘d’. Our cipher must allow for the user to shift any legal integer number of places (always to the right). So, if we shifted an ‘e’ 100 places to the right,
 it would be 100 % 26.
 
-###Cipher 2 – Vigenère Cipher –
+### Cipher 2: Vigenère Cipher –<br>
 The second cipher is a version of the Caesar cipher. It is a method of encrypting alphabetic text by using a series of
 interwoven Caesar ciphers based on the letters of a keyword. Rather than using an integer to indicate the shift, we will use a
 single word. For additional details: [click here](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher)
 
-###Cipher 3: Ong Cipher -
+### Cipher 3: Ong Cipher -<br>
 The last cipher is different than the first two. It works kind of like pig latin (and really isn’t a cipher). For the ong cipher,
 for each character in the cipher, you are going to evaluate if it is a vowel or not. If it is a vowel, you will just ignore it. If it is a
 consonant, you will add “ong” after every consonant. 
